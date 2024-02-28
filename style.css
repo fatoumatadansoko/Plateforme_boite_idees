@@ -1,0 +1,44 @@
+body {
+    background: hsl(0, 9%, 94%);
+    text-align: center;
+}
+
+/* la mise en forme de la page index*/
+
+body h1 {
+    text-align: left;
+    justify-content: left;
+}
+
+header .menu {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: rgb(247, 239, 239);
+    padding:  10px 300px;
+    font-size: 22px;
+    text-align: center;
+    margin: 0 200px;
+    
+}
+
+.head img {
+    display: inline-block;
+    display: block;
+    margin: 0 auto;
+    height: 650px;
+    width: auto;
+}
+
+.head a {
+    background-color: #e5926b;
+    color: white;
+    margin: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin-top: 20px; 
+    border-radius: 8px;
+    
+  }   
