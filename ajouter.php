@@ -14,15 +14,15 @@
            //extraction des informations envoyé dans des variables par la methode POST
            extract($_POST);
            //verifier que tous les champs ont été remplis
-           if(isset($nom) && isset($prenom) && $age){
+           if(isset($categorie) && isset($titre) && isset($description) && $statut){
                 //connexion à la base de donnée
-                include_once "connexion.php";
+                include_once "connexion1.php";
                 //requête d'ajout
-                $req = mysqli_query($con , "INSERT INTO Employe VALUES(NULL, '$nom', '$prenom','$age')");
+                $req = mysqli_query($con , "INSERT INTO Idees VALUES(NULL, '$categorie', '$titre','$description','$statut')");
                 if($req){//si la requête a été effectuée avec succès , on fait une redirection
-                    header("location: index.php");
+                    header("location: boites_idees.php");
                 }else {//si non
-                    $message = "Employé non ajouté";
+                    $message = "Idées  non ajouté";
                 }
 
            }else {
@@ -33,7 +33,7 @@
     
     ?>
     <div class="form">
-        <a href="boites_idees.html" class="back_btn"><img src="img/back.png"> Retour</a>
+        <a href="boites_idees.php" class="back_btn"><img src="img/back.png"> Retour</a>
         <h2>Ajouter une idée</h2>
         <p class="erreur_message">
             <?php 
@@ -45,10 +45,10 @@
 
         </p>
         <form action="" method="POST">
+            <label>Catégorie</label>
+            <input type="text" name="categorie">
             <label>Titre</label>
             <input type="text" name="titre">
-            <label>Categorie</label>
-            <input type="text" name="categorie">
             <label>Description</label>
             <input type="text" name="description">
             <label>Statut</label>
