@@ -100,4 +100,57 @@ font-size: 14px;
     border-bottom: 1px solid #e0e0e0;
     border-top: 1px solid #e0e0e0;
   }
+
+  /*Form CSS*/
+.form {
+    background-color: #f6f8f8;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
+.form form {
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+}
+.back_btn {
+    color: #ffcb61;
+    text-decoration: 0;
+    display: flex;
+    align-items: center;
+}
+.back_btn img {
+    height: 35px;
+    margin-right:5px ;
+}
+h2 {
+    margin: 20px 0;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+.erreur_message {
+    color: red;
+    font-size: 12px;
+}
+label {
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+input{
+    padding: 5px;
+    border: 1px solid #999;
+    outline: 0;
+    margin-top: 2px;
+}
+input:focus{
+    border: 1px solid #ffcb61;
+}
+input[type="submit"]{
+    margin-top: 30px;
+    background-color: #ffcb61;
+    border: 1px solid #ffcb61;
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+}
   
