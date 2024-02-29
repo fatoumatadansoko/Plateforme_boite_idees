@@ -20,7 +20,7 @@
         Prénom*: <input type="text" name="prenom" required> <br>
         Email*: <input type="text" name="mail" required> <br>
         Mot de passe*: <input type="password" name="pass" required> <br>
-        <input type="submit" >
+        <input type="submit"  name="inscrire">
 
     </form>
     
