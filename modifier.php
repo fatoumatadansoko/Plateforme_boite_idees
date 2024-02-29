@@ -15,7 +15,7 @@
          //on récupère le id dans le lien
           $id = $_GET['id'];
           //requête pour afficher les infos d'un employé
-          $req = mysqli_query($con , "SELECT * FROM Iddes WHERE id = $id");
+          $req = mysqli_query($con , "SELECT * FROM Iddees WHERE id = $id");
           $row = mysqli_fetch_assoc($req);
 
 
@@ -24,13 +24,13 @@
            //extraction des informations envoyé dans des variables par la methode POST
            extract($_POST);
            //verifier que tous les champs ont été remplis
-           if(isset($nom) && isset($prenom) && $age){
+           if(isset($titre) && isset($categorie) && isset($description) &&$statut){
                //requête de modification
-               $req = mysqli_query($con, "UPDATE employe SET nom = '$nom' , prenom = '$prenom' , age = '$age' WHERE id = $id");
+               $req = mysqli_query($con, "UPDATE Idees SET titre = '$titre' , categorie = '$categorie' , description = '$description' , statut = $statut WHERE id = $id");
                 if($req){//si la requête a été effectuée avec succès , on fait une redirection
-                    header("location: index.php");
+                    header("location: boites_idees.php");
                 }else {//si non
-                    $message = "Employé non modifié";
+                    $message = "Idées non modifié";
                 }
 
            }else {
@@ -42,8 +42,8 @@
     ?>
 
     <div class="form">
-        <a href="index.php" class="back_btn"><img src="images/back.png"> Retour</a>
-        <h2>Modifier l'employé : <?=$row['nom']?> </h2>
+        <a href="boites_idees.php" class="back_btn"><img src="images/back.png"> Retour</a>
+        <h2>Modifier l'idées : <?=$row['titre']?> </h2>
         <p class="erreur_message">
            <?php 
               if(isset($message)){
