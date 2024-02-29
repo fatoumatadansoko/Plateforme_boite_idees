@@ -24,7 +24,7 @@
             </tr>
             <?php 
                 //inclure la page de connexion
-                include_once "connexion.php";
+                include_once "boites_idees.php";
                 //requête pour afficher la liste des employés
                 $req = mysqli_query($con , "SELECT * FROM Utilisateur");
                 if(mysqli_num_rows($req) == 0){

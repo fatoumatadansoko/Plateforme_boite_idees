@@ -12,7 +12,7 @@
                 <div class="menu">
                      <a href="index.php">Accueil</a>
                      <a href="inscription.php">INSCRIPTION</a>
-                     <a href="boites_idees.html">Vos_idées</a>
+                     <a href="boites_idees.php">Vos_idées</a>
                </div>
     </header>
 

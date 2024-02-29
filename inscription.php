@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,10 +14,9 @@
     <p>
          <h2>Bienvenue!</h2>
          <h2>Inscrivez_vous d'abord</h2>
-    
     </p>
-    <form action="traitement.php" method="POST">
-        Nom*: <input type="text" name="nom" required> <br>
+    <form action="connexion.php" method="POST">
+        Nom*: <input type="text" name="nom" > <br>
         Prénom*: <input type="text" name="prenom" required> <br>
         Email*: <input type="text" name="mail" required> <br>
         Mot de passe*: <input type="password" name="pass" required> <br>
