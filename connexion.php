@@ -5,21 +5,22 @@ $nom=$_POST['nom'];
 $prenom=$_POST['prenom'];
 $mail=$_POST['mail'];
 $pass=$_POST['pass'];
+$erreur = '';
 
-
-require_once "config.php";
+require_once "boites_idees.php";
 
 if(empty($nom) || empty($prenom) || empty($mail) || empty($pass)) {
-    echo "tous les champs sont obligatoires";
-    exit;
+   $erreur = "tous les champs sont obligatoires";
+    header('Location: inscription.php');
 }
-$mdpHache = password_hash ($pass, PASSWORD_DEFAULT);
+else{
+    $mdpHache = password_hash ($pass, PASSWORD_DEFAULT);
 
 
- $sql="SELECT * FROM Utilisateur";
+ //$sql="SELECT * FROM Utilisateur";
 
- $query= "INSERT INTO `Utilisateur` ( `Nom`, 'prenom', `mail`,  `pass`)
-VALUES (:nom, :prenom, :mail, :pass )";
+ $sql= "INSERT INTO `Utilisateur` ( `nom`, 'prenom', `mail`,  `pass`)
+VALUES ('$nom', '$prenom', '$mail', '$mdpHache' )";
 
 $requete = $connexion->prepare($sql);
 
@@ -30,8 +31,9 @@ $requete->execute([
     ': pass'=>$mdpHache,
 ]);
 
-header('Location: idees.php');
+header('Location: boites_idees.php');
 
+}
 
 
 
