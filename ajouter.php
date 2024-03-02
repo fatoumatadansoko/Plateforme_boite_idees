@@ -1,60 +1,55 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if (isset($_POST['send'])) {
+    if (
+        isset($_POST['categorie']) &&
+        isset($_POST['titre']) &&
+        isset($_POST['description']) &&
+        isset($_POST['statut']) &&
+        $_POST['categorie'] != "" &&
+        $_POST['titre'] != "" &&
+        $_POST['description'] != "" &&
+        $_POST['statut'] != ""
+    ) {
+        include_once "config.php";
+        $sql = "INSERT INTO idees (categorie, titre, description, statut) VALUES (?, ?, ?, ?)";
+        
+        // Utilisation de requête préparée pour éviter les injections SQL
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssss", $_POST['categorie'], $_POST['titre'], $_POST['description'], $_POST['statut']);
+        
+        if ($stmt->execute()) {
+            header("location:boites_idees.php");
+        } else {
+            header("location:ajouter.php?message=AddFail");
+        }
+    } else {
+        header("location:ajouter.php?message=EmptyFields");
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <?php
-       //vérifier que le bouton ajouter a bien été cliqué
-       if(isset($_POST['button'])){
-           //extraction des informations envoyé dans des variables par la methode POST
-           extract($_POST);
-           //verifier que tous les champs ont été remplis
-           if(isset($categorie) && isset($titre) && isset($description) && $statut){
-                //connexion à la base de donnée
-                include_once "connexion1.php";
-                //requête d'ajout
-                $req = mysqli_query($con , "INSERT INTO Idees VALUES(NULL, '$categorie', '$titre','$description','$statut')");
-                if($req){//si la requête a été effectuée avec succès , on fait une redirection
-                    header("location: boites_idees.php");
-                }else {//si non
-                    $message = "Idées  non ajouté";
-                }
-
-           }else {
-               //si non
-               $message = "Veuillez remplir tous les champs !";
-           }
-       }
-    
-    ?>
-    <div class="form">
-        <a href="boites_idees.php" class="back_btn"><img src="img/back.png"> Retour</a>
-        <h2>Ajouter une idée</h2>
-        <p class="erreur_message">
-            <?php 
-            // si la variable message existe , affichons son contenu
-            if(isset($message)){
-                echo $message;
-            }
-            ?>
-
-        </p>
-        <form action="" method="POST">
-            <label>Catégorie</label>
-            <input type="text" name="categorie">
-            <label>Titre</label>
-            <input type="text" name="titre">
-            <label>Description</label>
-            <input type="text" name="description">
-            <label>Statut</label>
-            <input type="text" name="Statut">
-            <input type="submit" value="Ajouter" name="button">
-        </form>
-    </div>
+    <form action="" method="post">
+        <h1>Ajouter une idée</h1>
+        <input type="text" name="categorie" value="" placeholder="categorie">
+        <input type="text" name="titre" value="" placeholder="titre">
+        <input type="text" name="description" value="" placeholder="description">
+        <input type="text" name="statut" value="" placeholder="statut">
+        <input type="submit" value="Ajouter" name="send">
+        <a class="link back" href="boites_idees.php">Annuler</a>
+    </form>
 </body>
+
 </html>
