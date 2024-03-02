@@ -3,53 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boites à idées</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="container">
-        <a href="ajouter.php" class="Btn_add"> <img src="img/plus.png" alt="">Ajouter</a>
-
-
+    <main>
+        <div class="container">
+            <a href="ajouter.php">Ajouter une idée</a>
+        </div>
         <table>
-            <tr>
-                
-                <th>Catégorie</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Statut</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
-            </tr>
-            <?php 
-                //inclure la page de connexion
-                include_once "config.php";
-                //requête pour afficher la liste des idées
-                $req = mysqli_query($connexion, "SELECT * FROM Idees");
-                if(mysqli_num_rows($req) == 0){
-                    //s'il n'existe pas d'idées dans la base de données , alors on affiche ce message :
-                    echo "Il n'y a pas encore d'idées ajoutées !" ;
-                    
-                }else {
-                    //si non , affichons la liste de tous les idées
-                    while($row=mysqli_fetch_assoc($req)){
-                        ?>
-                        <tr>
-                            <td><?=$row['categorie']?></td>
-                            <td><?=$row['titre']?></td>
-                            <td><?=$row['description']?></td>
-                            <td><?=$row['statut']?></td>
-                            <!--Nous allons mettre l'id de chaque idée dans ce lien -->
-                            <td><a href="modifier.php?id=<?=$row['id']?>"><img src="img/pen.png"></a></td>
-                            <td><a href="supprimer.php?id=<?=$row['id']?>"><img src="img/trash.png"></a></td>
-                        </tr>
-                        <?php
-                    }
-                    
+            <thead>
+
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once "config.php";
+//liste des utilisateurs
+$sql =  "SELECT * FROM idees";
+$result =mysqli_query($conn,$sql);
+if (mysqli_num_rows($result) >0) {
+    //Afficher les résultats
+?>
+
+                <tr>
+                    <th>Categorie</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Statut</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+                while($row = mysqli_fetch_assoc($result)) {
+ ?>
+                <tr>
+
+                    <td><?=$row['categorie']?></td>
+                    <td><?=$row['titre']?></td>
+                    <td><?=$row['description']?></td>
+                    <td><?=$row['statut']?></td>
+                    <td class="image"> <a href="modifier.php?id=<?=$row['idee_id']?>"><img src="img/write.png" alt=""></a></td>
+                    <td class="image"> <a href="supprimer.php?id=<?=$row['idee_id']?>"><img src="img/remove.png" alt=""></a></td>
+                </tr>
+ <?php
                 }
-            ?>
+                }
+                else {
+                   echo "<p class='message'>0 idée ajoutée !</p>"; 
+                }
+?>
+            </tbody>
         </table>
-    </div>
+    </main>
+    
 </body>
 </html>
